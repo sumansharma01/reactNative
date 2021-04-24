@@ -1,15 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 const App=()=> {
+  const [name,setName]=useState('Suman');
+  const [person,setPerson]=useState({
+    name:'Binod', age:31
+  })
+  const handlePress=()=>{
+    setName('Pujan');
+    setPerson({name:'Tek', age:22})
+  }
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text>React-native app</Text>
       </View>
       <View style={styles.body}>
-        <Text style={[styles.boldText, styles.bodyText]}>{Math.ceil(Math.random()*10)}</Text>
+        <Text style={[styles.bodyText]}>Using the useState</Text>
+        <Text style={[styles.bodyText]}>Hey, my name is {name}</Text>
+        <Text style={[styles.bodyText]}>His name is {person.name} and he is {person.age} years old.</Text>
+        <View >
+          <Button title="Click me" onPress={handlePress}/>
+        </View>
+
       </View>
       
       
