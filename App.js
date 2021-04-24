@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList} from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 
 const App=()=> {
   const [person,setPerson]=useState([
@@ -19,6 +19,14 @@ const App=()=> {
     {name:'yz',id:'13'},
   ])
   
+  
+  const handleNamesPress=(id)=>{
+    console.log(id);
+    setPerson((prevState)=>{
+      return (prevState.filter((p)=>p.id!=id))
+    })
+  }
+
   return (
     <View style={styles.container}>
       
@@ -46,8 +54,13 @@ const App=()=> {
         keyExtractor={(item)=>{return(item.id)}}
         data={person}
         renderItem={({item})=>{return(
-          <Text style={[styles.mapP,styles.boldText]}>{item.name}</Text>)
-        }}
+
+          // text cannot have onpress so to make it a press use touchables
+
+          <TouchableOpacity onPress={()=>handleNamesPress(item.id)}>
+          <Text style={[styles.mapP,styles.boldText]}>{item.name}</Text>
+          </TouchableOpacity>
+        )}}
       />
       
       <StatusBar style="auto" />
